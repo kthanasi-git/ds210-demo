@@ -1,0 +1,19 @@
+wc gplus_combined.txt
+ 30,494,866  lines (essentially number of edges)
+cat gplus_combined.txt | awk '{print $1}' | sort | uniq -c | wc
+72,271 lines {number of vertices}
+Min # connections = 1
+Max # connections = 9999
+4893 people with just 1 connection
+~3400 people with just 2 connections
+25% connections = 8
+Median number of connections = 40
+75% connections = 210
+90% connections = 850
+99% connections = 5000
+Mean number of connections = 4223
+
+Some interesting questions to answer:
+Average distance between all pairs?
+Distribution of distances between all pairs?
+How many edges do I need to add to reduce average distance by 1?

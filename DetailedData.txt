@@ -1,0 +1,32 @@
+Files:
+
+nodeId.edges : The edges in the ego network for the node 'nodeId'. Edges are undirected for facebook, and directed (a follows b) for twitter and gplus. The 'ego' node does not appear, but it is assumed that they follow every node id that appears in this file.
+
+nodeId.circles : The set of circles for the ego node. Each line contains one circle, consisting of a series of node ids. The first entry in each line is the name of the circle.
+
+nodeId.feat : The features for each of the nodes that appears in the edge file.
+
+nodeId.egofeat : The features for the ego user.
+
+nodeId.featnames : The names of each of the feature dimensions. Features are '1' if the user has this property in their profile, and '0' otherwise. This file has been anonymized for facebook users, since the names of the features would reveal private data.
+
+
+Data is not necessarily consistent
+
+cat *.feat | awk '{print $1}' | sort | uniq -c | wc -l
+107596 (number of vertices in the features files)
+cat *.edges | awk '{printf "%s\n%s\n", $1, $2}' | sort | uniq -c
+
+time cat *.edges | awk '{printf "%s\n%s\n", $1, $2}' | sort | uniq -c | wc -l
+102100
+cat *.edges  0.04s user 0.63s system 1% cpu 1:00.27 total
+awk '{printf "%s\n%s\n", $1, $2}'  59.64s user 0.55s system 99% cpu 1:00.27 total
+sort  236.87s user 194.20s system 74% cpu 9:35.91 total
+uniq -c 24.35s user 0.52s system 4% cpu 9:35.91 total
+wc -l 0.00s user 0.00s system 1% cpu 9:35.91 total
+
+And it is expensive to process.  Finding unique vertices in the list of edges took almost 10 minutes (see above).
+
+Possibly more ambitious projects:
+nodeId.edges for the listed nodes does not match the combined files.  Create a new combined file from this and compute the statistics mentioned in the previous one.
+nodeId.feat, nodeId.featnames tell you properties about the people in this network.  Given those features can you build a classifier that predicts the number of "friends" they have?

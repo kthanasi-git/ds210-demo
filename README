@@ -1,0 +1,7 @@
+The statistics in this directory are from the following Stanford graph dataset:
+https://snap.stanford.edu/data/ego-Gplus.html
+The aggregate data set which has the friends of everyone else is here:
+https://snap.stanford.edu/data/gplus_combined.txt.gz
+Look at the file AggregateData.txt for some useful information on this dataset.  It should be 
+quite reasonable to calculate 6 degrees of separation or average distance between people on this dataset.
+
